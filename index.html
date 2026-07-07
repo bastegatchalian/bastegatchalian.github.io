@@ -395,6 +395,194 @@ body::after{
   body{cursor:auto}
   #cur,#cur-r{display:none}
 }
+
+/* ─── PROJ CARD HOVER OVERLAY ─── */
+.proj-card{position:relative;overflow:hidden}
+.proj-overlay{
+  position:absolute;inset:0;z-index:10;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;
+  background:rgba(6,8,13,.72);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  opacity:0;transition:opacity .32s cubic-bezier(.16,1,.3,1);
+  border-radius:var(--r-lg);cursor:none;
+}
+.proj-card:hover .proj-overlay{opacity:1}
+.proj-overlay-btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--accent);color:#06080d;
+  padding:.6rem 1.5rem;border-radius:999px;
+  font-family:var(--font-body);font-size:.78rem;font-weight:700;
+  letter-spacing:.04em;transform:translateY(10px);
+  transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .3s;
+}
+.proj-card:hover .proj-overlay-btn{transform:translateY(0)}
+.proj-overlay-btn:hover{box-shadow:0 8px 24px rgba(126,184,247,.35)}
+.proj-overlay-type{
+  font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);
+  transform:translateY(8px);transition:transform .4s cubic-bezier(.16,1,.3,1) .05s;
+}
+.proj-card:hover .proj-overlay-type{transform:translateY(0)}
+
+/* ─── MODAL BACKDROP ─── */
+#pm-backdrop{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(4,6,10,.85);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;
+  opacity:0;visibility:hidden;
+  transition:opacity .4s cubic-bezier(.16,1,.3,1),visibility .4s;
+}
+#pm-backdrop.open{opacity:1;visibility:visible}
+
+/* ─── MODAL BOX ─── */
+#pm-box{
+  background:linear-gradient(145deg,#0e1118,#0a0d14);
+  border:1px solid var(--glass-border);border-radius:28px;
+  width:100%;max-width:860px;max-height:88vh;
+  overflow-y:auto;position:relative;
+  transform:translateY(32px) scale(.97);
+  transition:transform .45s cubic-bezier(.16,1,.3,1);
+  scrollbar-width:thin;scrollbar-color:rgba(126,184,247,.2) transparent;
+}
+#pm-backdrop.open #pm-box{transform:translateY(0) scale(1)}
+#pm-box::-webkit-scrollbar{width:4px}
+#pm-box::-webkit-scrollbar-thumb{background:rgba(126,184,247,.2);border-radius:9px}
+
+/* ─── MODAL HEADER ─── */
+.pm-header{
+  position:sticky;top:0;z-index:10;
+  padding:1.6rem 2rem 1.2rem;
+  background:linear-gradient(to bottom,#0e1118 80%,transparent);
+  display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;
+}
+.pm-close{
+  background:var(--glass);border:1px solid var(--glass-border);
+  color:var(--text-dim);width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:none;flex-shrink:0;font-size:1rem;
+  transition:background .2s,color .2s,transform .2s;
+}
+.pm-close:hover{background:rgba(255,255,255,.1);color:var(--text);transform:scale(1.1)}
+.pm-cat{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
+.pm-title{font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.02em;line-height:1.1}
+
+/* ─── MODAL BODY ─── */
+.pm-body{padding:0 2rem 2.5rem}
+.pm-desc{color:var(--text-dim);line-height:1.85;font-size:.92rem;margin-bottom:2rem}
+
+/* ─── META ROW ─── */
+.pm-meta{
+  display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem;
+}
+.pm-meta-item{
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:var(--r);padding:.9rem 1.2rem;min-width:130px;flex:1;
+}
+.pm-meta-label{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.35rem}
+.pm-meta-val{font-size:.85rem;color:var(--text);font-weight:500}
+
+/* ─── TOOLS TAGS ─── */
+.pm-tools{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.pm-tool{
+  background:rgba(126,184,247,.07);border:1px solid rgba(126,184,247,.15);
+  color:var(--accent);font-size:.7rem;letter-spacing:.05em;
+  padding:.3rem .8rem;border-radius:999px;
+}
+
+/* ─── VIDEO PLAYER ─── */
+.pm-video-wrap{
+  position:relative;width:100%;border-radius:var(--r);overflow:hidden;
+  background:#000;margin-bottom:1.2rem;
+  box-shadow:0 20px 50px rgba(0,0,0,.6);
+}
+.pm-video-wrap video,.pm-video-wrap iframe{
+  width:100%;aspect-ratio:16/9;display:block;border:none;
+}
+.pm-vid-placeholder{
+  width:100%;aspect-ratio:16/9;
+  background:linear-gradient(135deg,rgba(126,184,247,.08),rgba(167,139,250,.06));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.8rem;border-radius:var(--r);border:1px dashed rgba(126,184,247,.2);
+}
+.pm-vid-placeholder .big-ico{font-size:3rem;opacity:.6}
+.pm-vid-placeholder p{font-size:.8rem;color:var(--text-muted);text-align:center;max-width:260px;line-height:1.6}
+
+/* ─── VIDEO CAROUSEL NAV ─── */
+.pm-vid-nav{
+  display:flex;gap:.6rem;margin-bottom:2rem;flex-wrap:wrap;
+}
+.pm-vid-tab{
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:999px;padding:.38rem 1rem;
+  font-size:.72rem;color:var(--text-dim);cursor:none;
+  transition:all .2s;
+}
+.pm-vid-tab.on{background:rgba(126,184,247,.12);border-color:var(--accent);color:var(--accent)}
+
+/* ─── IMAGE GALLERY ─── */
+.pm-gallery{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:.8rem;margin-bottom:2rem;
+}
+.pm-gallery-img{
+  aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;cursor:none;
+  background:var(--glass);border:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .3s,border-color .3s;position:relative;
+}
+.pm-gallery-img:hover{transform:scale(1.03);border-color:rgba(126,184,247,.3)}
+.pm-gallery-img .placeholder-ico{font-size:2rem;opacity:.35}
+.pm-gallery-img img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ─── LIGHTBOX ─── */
+#pm-lightbox{
+  position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.94);
+  display:flex;align-items:center;justify-content:center;padding:2rem;
+  opacity:0;visibility:hidden;transition:all .3s;cursor:none;
+}
+#pm-lightbox.open{opacity:1;visibility:visible}
+#pm-lightbox img{max-width:100%;max-height:90vh;border-radius:var(--r);box-shadow:0 0 80px rgba(0,0,0,.8)}
+.lb-close{position:absolute;top:1.5rem;right:1.5rem;background:var(--glass);border:1px solid var(--glass-border);color:var(--text);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:none;transition:all .2s}
+.lb-close:hover{background:rgba(255,255,255,.12)}
+
+/* ─── FEATURES LIST (dev) ─── */
+.pm-features{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+.pm-features li{font-size:.88rem;color:var(--text-dim);line-height:1.7;padding-left:1.4rem;position:relative}
+.pm-features li::before{content:'◆';position:absolute;left:0;color:var(--accent);font-size:.5rem;top:.35rem}
+
+/* ─── GITHUB LINK ─── */
+.pm-gh-link{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--glass);border:1px solid var(--glass-border);
+  color:var(--text);padding:.7rem 1.4rem;border-radius:999px;
+  text-decoration:none;font-size:.8rem;letter-spacing:.04em;
+  transition:all .2s;margin-top:.5rem;
+}
+.pm-gh-link:hover{background:var(--glass-hover);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+
+/* ─── SECTION DIVIDER inside modal ─── */
+.pm-divider{height:1px;background:var(--glass-border);margin:1.8rem 0}
+.pm-section-label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:block}
+
+@media(max-width:600px){
+  #pm-box{border-radius:20px}
+  .pm-header,.pm-body{padding-left:1.2rem;padding-right:1.2rem}
+  .pm-gallery{grid-template-columns:repeat(2,1fr)}
+  .pm-meta-item{min-width:unset}
+}
+
+
+/* ─── SKILL PILL FILTER TRANSITIONS ─── */
+.pill{transition:all .35s cubic-bezier(.16,1,.3,1),opacity .3s ease,transform .3s ease}
+.pill--hidden{
+  opacity:0 !important;transform:scale(.88) translateY(10px) !important;
+  pointer-events:none;position:absolute;visibility:hidden;
+}
+/* keep grid stable while pills hide */
+.pills{position:relative}
+
 </style>
 </head>
 <body>
@@ -515,27 +703,14 @@ body::after{
     <span class="s-label rev">02 — Skills & Tools</span>
     <div class="acc-bar rev"></div>
     <h2 class="s-title rev">What I <em>bring</em><br>to every project.</h2>
-    <div class="cats rev d1">
-      <span class="cat on">All</span>
-      <span class="cat">Video</span>
-      <span class="cat">Design</span>
-      <span class="cat">Social</span>
-      <span class="cat">Dev</span>
+    <div class="cats rev d1" id="skill-cats">
+      <span class="cat on" data-filter="all">All</span>
+      <span class="cat" data-filter="video">Video</span>
+      <span class="cat" data-filter="design">Design</span>
+      <span class="cat" data-filter="social">Social</span>
+      <span class="cat" data-filter="dev">Dev</span>
     </div>
-    <div class="pills">
-      <div class="pill rev d1"><span class="ico">🎬</span>Video Editing</div>
-      <div class="pill rev d1"><span class="ico">📱</span>Reels & TikTok</div>
-      <div class="pill v2 rev d2"><span class="ico">🎨</span>Graphic Design</div>
-      <div class="pill v2 rev d2"><span class="ico">✏️</span>Brand Identity</div>
-      <div class="pill rev d3"><span class="ico">📊</span>Social Media Mgmt</div>
-      <div class="pill rev d3"><span class="ico">📅</span>Content Planning</div>
-      <div class="pill v3 rev d1"><span class="ico">🔍</span>SEO Copywriting</div>
-      <div class="pill rev d2"><span class="ico">📂</span>Notion</div>
-      <div class="pill rev d3"><span class="ico">☁️</span>Google Workspace</div>
-      <div class="pill v3 rev d1"><span class="ico">💻</span>Computer Science</div>
-      <div class="pill v2 rev d2"><span class="ico">⚡</span>Fast Learner</div>
-      <div class="pill rev d3"><span class="ico">🤝</span>Collaboration</div>
-    </div>
+    <div class="pills" id="skills-grid"></div>
   </div>
 </section>
 
@@ -619,15 +794,20 @@ body::after{
 
     <div class="proj-grid">
 
-      <div class="proj-card rev d1">
+      <!-- CARD 1: Video -->
+      <div class="proj-card rev d1" data-proj="0" tabindex="0" role="button" aria-label="View Schlee Media Brand Reels project">
         <div class="proj-thumb">
           <div class="bg" style="background:linear-gradient(135deg,rgba(126,184,247,.16),rgba(167,139,250,.1))"></div>
           <span class="proj-ico">🎬</span>
         </div>
+        <div class="proj-overlay">
+          <div class="proj-overlay-btn">Watch Reels ↗</div>
+          <div class="proj-overlay-type">Video Editing</div>
+        </div>
         <div class="proj-body">
           <div class="proj-cat">Video Editing</div>
           <div class="proj-name">Schlee Media — Brand Reels</div>
-          <div class="proj-desc">Short-form video production for Voyaro, Snoozeloop, and LeVoleur. Dynamic cuts, captions, and brand-aligned visual storytelling for social performance.</div>
+          <div class="proj-desc">Short-form video production for Voyaro, Snoozeloop, and LeVoleur. Dynamic cuts, captions, and brand-aligned visual storytelling.</div>
           <div class="tags">
             <span class="tag">Instagram Reels</span>
             <span class="tag">Short-form</span>
@@ -636,15 +816,20 @@ body::after{
         </div>
       </div>
 
-      <div class="proj-card rev d2">
+      <!-- CARD 2: Design -->
+      <div class="proj-card rev d2" data-proj="1" tabindex="0" role="button" aria-label="View CAL Brand Materials project">
         <div class="proj-thumb">
           <div class="bg" style="background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(126,184,247,.08))"></div>
           <span class="proj-ico">🎨</span>
         </div>
+        <div class="proj-overlay">
+          <div class="proj-overlay-btn">View Designs ↗</div>
+          <div class="proj-overlay-type">Graphic Design</div>
+        </div>
         <div class="proj-body">
           <div class="proj-cat">Graphic Design</div>
           <div class="proj-name">CAL Brand Materials</div>
-          <div class="proj-desc">Full suite of branded materials — goodie bags, pamphlets, cups, intro cards — maintaining a cohesive visual identity across all touchpoints.</div>
+          <div class="proj-desc">Full suite of branded materials maintaining a cohesive visual identity across all touchpoints.</div>
           <div class="tags">
             <span class="tag">Brand Identity</span>
             <span class="tag">Print Design</span>
@@ -653,15 +838,20 @@ body::after{
         </div>
       </div>
 
-      <div class="proj-card rev d3">
+      <!-- CARD 3: Social -->
+      <div class="proj-card rev d3" data-proj="2" tabindex="0" role="button" aria-label="View CAL Content Strategy project">
         <div class="proj-thumb">
           <div class="bg" style="background:linear-gradient(135deg,rgba(167,139,250,.13),rgba(52,211,153,.08))"></div>
           <span class="proj-ico">📱</span>
         </div>
+        <div class="proj-overlay">
+          <div class="proj-overlay-btn">View Strategy ↗</div>
+          <div class="proj-overlay-type">Social Media</div>
+        </div>
         <div class="proj-body">
           <div class="proj-cat">Social Media Campaigns</div>
           <div class="proj-name">CAL Content Strategy</div>
-          <div class="proj-desc">Weekly content calendars, SEO-optimised copy, and direct-response ads that grew content output volume by 25% and strengthened brand presence.</div>
+          <div class="proj-desc">Weekly content calendars, SEO copy, and direct-response ads that grew output by 25%.</div>
           <div class="tags">
             <span class="tag">Content Calendar</span>
             <span class="tag">SEO Copy</span>
@@ -670,15 +860,20 @@ body::after{
         </div>
       </div>
 
-      <div class="proj-card rev d1">
+      <!-- CARD 4: Dev -->
+      <div class="proj-card rev d1" data-proj="3" tabindex="0" role="button" aria-label="View DTI Budget Calculator System project">
         <div class="proj-thumb">
           <div class="bg" style="background:linear-gradient(135deg,rgba(126,184,247,.08),rgba(52,211,153,.14))"></div>
           <span class="proj-ico">💻</span>
         </div>
+        <div class="proj-overlay">
+          <div class="proj-overlay-btn">Open Project ↗</div>
+          <div class="proj-overlay-type">Development</div>
+        </div>
         <div class="proj-body">
           <div class="proj-cat">Development</div>
           <div class="proj-name">DTI Budget Calculator System</div>
-          <div class="proj-desc">Final Year Project — a Budget Calculator Assistance System for DTI Region 10, focused on improving financial planning, data accuracy, and user accessibility.</div>
+          <div class="proj-desc">Budget Calculator Assistance System for DTI Region 10, focused on financial planning and user accessibility.</div>
           <div class="tags">
             <span class="tag">Computer Science</span>
             <span class="tag">DTI Region 10</span>
@@ -687,15 +882,20 @@ body::after{
         </div>
       </div>
 
-      <div class="proj-card rev d2">
+      <!-- CARD 5: Research -->
+      <div class="proj-card rev d2" data-proj="4" tabindex="0" role="button" aria-label="View Lemongrass Research project">
         <div class="proj-thumb">
           <div class="bg" style="background:linear-gradient(135deg,rgba(167,139,250,.16),rgba(126,184,247,.05))"></div>
           <span class="proj-ico">🔬</span>
         </div>
+        <div class="proj-overlay">
+          <div class="proj-overlay-btn">View Research ↗</div>
+          <div class="proj-overlay-type">Research</div>
+        </div>
         <div class="proj-body">
           <div class="proj-cat">Research</div>
           <div class="proj-name">Lemongrass Research — Summit 2023</div>
-          <div class="proj-desc">Award-winning investigatory project studying lemongrass effects on Periplaneta americana. Best Research Group at Xavier University Summit 2023.</div>
+          <div class="proj-desc">Award-winning investigatory project. Best Research Group at Xavier University Summit 2023.</div>
           <div class="tags">
             <span class="tag">Best in Class</span>
             <span class="tag">Summit 2023</span>
@@ -704,15 +904,20 @@ body::after{
         </div>
       </div>
 
-      <div class="proj-card rev d3">
+      <!-- CARD 6: Content -->
+      <div class="proj-card rev d3" data-proj="5" tabindex="0" role="button" aria-label="View E-books and Lead Gen Assets project">
         <div class="proj-thumb">
           <div class="bg" style="background:linear-gradient(135deg,rgba(52,211,153,.08),rgba(167,139,250,.14))"></div>
           <span class="proj-ico">✍️</span>
         </div>
+        <div class="proj-overlay">
+          <div class="proj-overlay-btn">View Work ↗</div>
+          <div class="proj-overlay-type">Content Creation</div>
+        </div>
         <div class="proj-body">
           <div class="proj-cat">Content Creation</div>
-          <div class="proj-name">E-books & Lead Gen Assets</div>
-          <div class="proj-desc">Produced e-books and long-form content assets supporting lead generation campaigns — integrating copywriting, layout design, and brand voice.</div>
+          <div class="proj-name">E-books &amp; Lead Gen Assets</div>
+          <div class="proj-desc">E-books and long-form content assets supporting lead generation campaigns with copywriting, layout design, and brand voice.</div>
           <div class="tags">
             <span class="tag">Copywriting</span>
             <span class="tag">Lead Generation</span>
@@ -794,11 +999,63 @@ document.querySelectorAll('.ml').forEach(l => {
   l.addEventListener('click', () => { mm.classList.remove('open'); ham.classList.remove('open'); });
 });
 
-/* ── Skill category filter (visual) ── */
-document.querySelectorAll('.cat').forEach(btn => {
+/* ════════════════════════════════════════
+   SKILLS FILTER SYSTEM
+   ════════════════════════════════════════ */
+const SKILLS = [
+  { ico: '🎬', label: 'Video Editing',     variant: '',   cats: ['video'] },
+  { ico: '📱', label: 'Reels & TikTok',    variant: '',   cats: ['video'] },
+  { ico: '🎨', label: 'Graphic Design',    variant: 'v2', cats: ['design'] },
+  { ico: '✏️',  label: 'Brand Identity',   variant: 'v2', cats: ['design'] },
+  { ico: '📊', label: 'Social Media Mgmt', variant: '',   cats: ['social'] },
+  { ico: '📅', label: 'Content Planning',  variant: '',   cats: ['social'] },
+  { ico: '🔍', label: 'SEO Copywriting',   variant: 'v3', cats: ['social'] },
+  { ico: '💻', label: 'Computer Science',  variant: 'v3', cats: ['dev'] },
+  { ico: '📂', label: 'Notion',            variant: '',   cats: ['all'] },
+  { ico: '☁️',  label: 'Google Workspace', variant: '',   cats: ['all'] },
+  { ico: '⚡', label: 'Fast Learner',      variant: 'v2', cats: ['all'] },
+  { ico: '🤝', label: 'Collaboration',     variant: '',   cats: ['all'] },
+];
+
+const skillsGrid = document.getElementById('skills-grid');
+
+function renderSkills(filter) {
+  // Clear grid
+  skillsGrid.innerHTML = '';
+
+  const visible = SKILLS.filter(s =>
+    filter === 'all' || s.cats.includes('all') || s.cats.includes(filter)
+  );
+
+  visible.forEach((s, i) => {
+    const delay = ['d1','d2','d3','d1','d2','d3'][i % 6];
+    const el = document.createElement('div');
+    el.className = `pill ${s.variant} vis`.trim();
+    el.setAttribute('data-cats', s.cats.join(','));
+    el.innerHTML = `<span class="ico">${s.ico}</span>${s.label}`;
+    skillsGrid.appendChild(el);
+
+    // stagger entrance
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px) scale(.95)';
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        el.style.opacity = '';
+        el.style.transform = '';
+      }, i * 45);
+    });
+  });
+}
+
+// Initial render
+renderSkills('all');
+
+// Tab click handler
+document.querySelectorAll('#skill-cats .cat').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.cat').forEach(b => b.classList.remove('on'));
+    document.querySelectorAll('#skill-cats .cat').forEach(b => b.classList.remove('on'));
     btn.classList.add('on');
+    renderSkills(btn.dataset.filter);
   });
 });
 
@@ -824,6 +1081,308 @@ window.addEventListener('scroll', () => {
     }
   });
 }, { passive: true });
+
+/* ════════════════════════════════════════════
+   PROJECT MODAL SYSTEM
+   ════════════════════════════════════════════ */
+
+/* ── Project data ── */
+const PROJECTS = [
+  {
+    id: 0,
+    type: 'video',
+    cat: 'Video Editing',
+    title: 'Schlee Media — Brand Reels',
+    client: 'Schlee Media',
+    role: 'Video Editor',
+    period: 'May 2025 – Mar 2026',
+    desc: 'Edited short-form videos and Instagram Reels for three brand clients — Voyaro, Snoozeloop, and LeVoleur. Applied strategic pacing, dynamic cuts, on-screen captions, and visual storytelling tailored to each brand. Delivered consistent, polished content that contributed to a 20–30% improvement in output volume per client.',
+    tools: ['CapCut','DaVinci Resolve','Adobe Premiere Pro','After Effects'],
+    videos: [
+      { label: 'Voyaro Reel', src: null, note: 'Add your Voyaro MP4 or YouTube embed URL here' },
+      { label: 'Snoozeloop Reel', src: null, note: 'Add your Snoozeloop MP4 or YouTube embed URL here' },
+      { label: 'LeVoleur Reel', src: null, note: 'Add your LeVoleur MP4 or YouTube embed URL here' },
+    ]
+  },
+  {
+    id: 1,
+    type: 'design',
+    cat: 'Graphic Design',
+    title: 'CAL Brand Materials',
+    client: 'CAL — Creative Aesthetics & Lifestyle',
+    role: 'Creative Designer',
+    period: 'May 2025 – Present',
+    desc: 'Designed a full suite of branded marketing materials including goodie bags, pamphlets, cups, and intro cards. Maintained a cohesive visual identity across all physical and digital touchpoints while building weekly content calendars for recurring social media series.',
+    tools: ['Adobe Illustrator','Canva','Photoshop','Figma'],
+    images: [
+      { label: 'Goodie Bag', src: null },
+      { label: 'Pamphlet', src: null },
+      { label: 'Intro Cards', src: null },
+      { label: 'Social Assets', src: null },
+      { label: 'Cup Design', src: null },
+      { label: 'Brand Guide', src: null },
+    ]
+  },
+  {
+    id: 2,
+    type: 'design',
+    cat: 'Social Media Campaigns',
+    title: 'CAL Content Strategy',
+    client: 'CAL — Creative Aesthetics & Lifestyle',
+    role: 'Creative Designer / Content Strategist',
+    period: 'May 2025 – Present',
+    desc: 'Built and managed weekly content calendars for recurring social media series. Produced SEO-optimised copy, direct-response ads, and e-books to support lead generation — boosting content output volume by approximately 25% while maintaining consistent brand voice.',
+    tools: ['Notion','Canva','Google Workspace','Meta Ads Manager'],
+    images: [
+      { label: 'Content Calendar', src: null },
+      { label: 'Ad Creative 1', src: null },
+      { label: 'Ad Creative 2', src: null },
+      { label: 'Social Post', src: null },
+    ]
+  },
+  {
+    id: 3,
+    type: 'development',
+    cat: 'Development',
+    title: 'DTI Budget Calculator System',
+    client: 'DTI Region 10 — RAPID Growth Project',
+    role: 'Lead Developer (Final Year Project)',
+    period: '2024 – 2025',
+    desc: 'Developed a Budget Calculator Assistance System (BCAS) for DTI Region 10 as the capstone project for ITCC 42. The system was designed to improve financial planning accuracy and accessibility for small business owners and DTI field staff.',
+    tools: ['Python','CustomTkinter','SQLite','Docker','Git'],
+    github: 'https://github.com/bastegatchalian',
+    features: [
+      'Role-based permissions system for admin and field staff access',
+      'Budget calculation engine with real-time validation and error handling',
+      'Exportable PDF reports for DTI documentation requirements',
+      'Docker-based deployment with automated unit testing (TDD)',
+      'Clean, accessible UI built with CustomTkinter for Windows',
+      'Data persistence with SQLite database backend',
+    ],
+    images: [
+      { label: 'Dashboard', src: null },
+      { label: 'Calculator View', src: null },
+      { label: 'Reports Module', src: null },
+    ]
+  },
+  {
+    id: 4,
+    type: 'research',
+    cat: 'Research',
+    title: 'Lemongrass Research — Summit 2023',
+    client: 'Xavier University — STEM Strand',
+    role: 'Lead Researcher',
+    period: '2022 – 2023',
+    desc: 'An experimental investigatory project studying the effects of lemongrass (Cymbopogon citratus) on Periplaneta americana (American cockroach). The research involved full scientific methodology: hypothesis design, data collection, controlled observation, and documented findings. Awarded Best Investigatory Project and One of the Best Research Groups at Summit 2023.',
+    tools: ['Scientific Method','Data Collection','Statistical Analysis','Research Documentation'],
+    features: [
+      'Controlled laboratory experiment with repeatable test conditions',
+      'Quantitative data collection across multiple trial periods',
+      'Statistical analysis of lemongrass concentration vs. repellent effect',
+      'Peer-reviewed documentation and Summit 2023 presentation',
+      'Awarded Best Investigatory Project at Xavier University',
+    ]
+  },
+  {
+    id: 5,
+    type: 'design',
+    cat: 'Content Creation',
+    title: 'E-books & Lead Gen Assets',
+    client: 'CAL — Creative Aesthetics & Lifestyle',
+    role: 'Copywriter & Layout Designer',
+    period: 'May 2025 – Present',
+    desc: 'Produced long-form content assets including e-books and lead generation materials to support digital marketing campaigns. Combined copywriting, layout design, and brand voice to create downloadable assets that drove audience engagement and supported sales funnels.',
+    tools: ['Canva','Google Docs','Notion','Adobe Illustrator'],
+    images: [
+      { label: 'E-book Cover', src: null },
+      { label: 'Interior Spread', src: null },
+      { label: 'Lead Magnet', src: null },
+      { label: 'CTA Page', src: null },
+    ]
+  }
+];
+
+/* ── Render helpers ── */
+function renderMeta(p) {
+  return `<div class="pm-meta">
+    <div class="pm-meta-item"><div class="pm-meta-label">Client</div><div class="pm-meta-val">${p.client}</div></div>
+    <div class="pm-meta-item"><div class="pm-meta-label">Role</div><div class="pm-meta-val">${p.role}</div></div>
+    <div class="pm-meta-item"><div class="pm-meta-label">Period</div><div class="pm-meta-val">${p.period}</div></div>
+  </div>`;
+}
+
+function renderTools(tools) {
+  return `<span class="pm-section-label">Tools & Software</span>
+  <div class="pm-tools">${tools.map(t => `<span class="pm-tool">${t}</span>`).join('')}</div>`;
+}
+
+function renderVideoPlaceholder(v, idx) {
+  if (v.src && v.src.includes('youtube')) {
+    return `<div class="pm-video-wrap"><iframe src="${v.src}" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe></div>`;
+  }
+  if (v.src) {
+    return `<div class="pm-video-wrap"><video controls preload="metadata" src="${v.src}"></video></div>`;
+  }
+  return `<div class="pm-vid-placeholder"><span class="big-ico">🎬</span><p>${v.note || 'Upload your video file or paste a YouTube embed URL in the project data.'}</p></div>`;
+}
+
+function renderImageGallery(images) {
+  return `<span class="pm-section-label">Gallery</span>
+  <div class="pm-gallery">${images.map((img, i) =>
+    img.src
+      ? `<div class="pm-gallery-img" data-src="${img.src}" role="button" tabindex="0" aria-label="Enlarge ${img.label}"><img src="${img.src}" alt="${img.label}" loading="lazy"></div>`
+      : `<div class="pm-gallery-img" aria-label="${img.label} — placeholder"><span class="placeholder-ico">🖼️</span></div>`
+  ).join('')}</div>`;
+}
+
+function renderFeatures(features) {
+  return `<span class="pm-section-label">Key Features</span>
+  <ul class="pm-features">${features.map(f => `<li>${f}</li>`).join('')}</ul>`;
+}
+
+/* ── Build modal content by type ── */
+function buildModalContent(p) {
+  let html = `<p class="pm-desc">${p.desc}</p>`;
+  html += renderMeta(p);
+  html += '<div class="pm-divider"></div>';
+
+  if (p.type === 'video') {
+    // Video carousel
+    html += `<span class="pm-section-label">Project Videos</span>
+    <div class="pm-vid-nav">
+      ${p.videos.map((v, i) => `<button class="pm-vid-tab ${i===0?'on':''}" data-vi="${i}">${v.label}</button>`).join('')}
+    </div>
+    <div id="pm-vid-stage">${renderVideoPlaceholder(p.videos[0], 0)}</div>
+    <div class="pm-divider"></div>`;
+    html += renderTools(p.tools);
+
+  } else if (p.type === 'design') {
+    if (p.images) html += renderImageGallery(p.images);
+    html += '<div class="pm-divider"></div>';
+    html += renderTools(p.tools);
+
+  } else if (p.type === 'development') {
+    if (p.images) html += renderImageGallery(p.images);
+    html += '<div class="pm-divider"></div>';
+    if (p.features) html += renderFeatures(p.features);
+    html += '<div class="pm-divider"></div>';
+    html += renderTools(p.tools);
+    if (p.github) html += `<a class="pm-gh-link" href="${p.github}" target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      View on GitHub
+    </a>`;
+
+  } else if (p.type === 'research') {
+    if (p.features) html += renderFeatures(p.features);
+    html += '<div class="pm-divider"></div>';
+    html += renderTools(p.tools);
+  }
+
+  return html;
+}
+
+/* ── Open / Close modal ── */
+const backdrop = document.getElementById('pm-backdrop');
+const pmBody   = document.getElementById('pm-body');
+const pmCat    = document.getElementById('pm-cat');
+const pmTitle  = document.getElementById('pm-title');
+let lastFocus  = null;
+
+function openModal(idx) {
+  const p = PROJECTS[idx];
+  if (!p) return;
+  lastFocus = document.activeElement;
+  pmCat.textContent   = p.cat;
+  pmTitle.textContent = p.title;
+  pmBody.innerHTML    = buildModalContent(p);
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('pm-close').focus();
+  bindModalEvents(p);
+}
+
+function closeModal() {
+  backdrop.classList.remove('open');
+  document.body.style.overflow = '';
+  if (lastFocus) lastFocus.focus();
+  // stop any playing videos
+  pmBody.querySelectorAll('video').forEach(v => v.pause());
+}
+
+function bindModalEvents(p) {
+  // Video tab switching
+  pmBody.querySelectorAll('.pm-vid-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      pmBody.querySelectorAll('.pm-vid-tab').forEach(t => t.classList.remove('on'));
+      tab.classList.add('on');
+      const vi = parseInt(tab.dataset.vi);
+      const stage = document.getElementById('pm-vid-stage');
+      stage.innerHTML = renderVideoPlaceholder(p.videos[vi], vi);
+    });
+  });
+
+  // Image lightbox
+  pmBody.querySelectorAll('.pm-gallery-img[data-src]').forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.dataset.src));
+    img.addEventListener('keydown', e => { if (e.key === 'Enter') openLightbox(img.dataset.src); });
+  });
+}
+
+/* ── Lightbox ── */
+const lightbox = document.getElementById('pm-lightbox');
+const lbImg    = document.getElementById('lb-img');
+
+function openLightbox(src) {
+  lbImg.src = src;
+  lightbox.classList.add('open');
+}
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  lbImg.src = '';
+}
+
+document.getElementById('lb-close').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+/* ── Wire up card clicks ── */
+document.querySelectorAll('.proj-card[data-proj]').forEach(card => {
+  card.addEventListener('click', () => openModal(parseInt(card.dataset.proj)));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(parseInt(card.dataset.proj)); }
+  });
+});
+
+/* ── Close triggers ── */
+document.getElementById('pm-close').addEventListener('click', closeModal);
+backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (lightbox.classList.contains('open')) closeLightbox();
+    else if (backdrop.classList.contains('open')) closeModal();
+  }
+});
+
 </script>
+
+<!-- ═══ PROJECT MODAL ═══ -->
+<div id="pm-backdrop" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+  <div id="pm-box">
+    <div class="pm-header">
+      <div>
+        <div class="pm-cat" id="pm-cat"></div>
+        <div class="pm-title" id="pm-title"></div>
+      </div>
+      <button class="pm-close" id="pm-close" aria-label="Close modal">✕</button>
+    </div>
+    <div class="pm-body" id="pm-body"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="pm-lightbox">
+  <button class="lb-close" id="lb-close">✕</button>
+  <img id="lb-img" src="" alt="Enlarged view">
+</div>
+
 </body>
 </html>
