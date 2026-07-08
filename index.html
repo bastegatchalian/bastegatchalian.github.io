@@ -1,4 +1,3 @@
-olio · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +35,7 @@ body{
   overflow-x:hidden;cursor:none;
   -webkit-font-smoothing:antialiased;
 }
- 
+
 /* ─── CURSOR ─── */
 #cur,#cur-r{
   position:fixed;z-index:9999;pointer-events:none;
@@ -46,7 +45,7 @@ body{
 #cur-r{width:34px;height:34px;border:1px solid rgba(126,184,247,.35);transition:width .3s,height .3s,opacity .3s}
 body:has(a:hover) #cur,body:has(button:hover) #cur{width:18px;height:18px}
 body:has(a:hover) #cur-r,body:has(button:hover) #cur-r{width:56px;height:56px;opacity:.5}
- 
+
 /* ─── LOADER ─── */
 #loader{
   position:fixed;inset:0;z-index:10000;background:var(--bg);
@@ -68,7 +67,7 @@ body:has(a:hover) #cur-r,body:has(button:hover) #cur-r{width:56px;height:56px;op
 @keyframes ldBar{to{width:100%}}
 @keyframes fadeIn{to{opacity:1}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
- 
+
 /* ─── NAV ─── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
@@ -105,7 +104,7 @@ nav{
 .ham.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .ham.open span:nth-child(2){opacity:0}
 .ham.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
- 
+
 /* ─── MOBILE MENU ─── */
 .mmenu{
   position:fixed;inset:0;z-index:199;background:rgba(6,8,13,.96);
@@ -116,12 +115,12 @@ nav{
 .mmenu.open{opacity:1;visibility:visible}
 .mmenu a{font-family:var(--font-display);font-size:clamp(2rem,7vw,3rem);color:var(--text);text-decoration:none;opacity:.7;transition:opacity .2s}
 .mmenu a:hover{opacity:1}
- 
+
 /* ─── REVEAL ─── */
 .rev{opacity:0;transform:translateY(36px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
 .rev.vis{opacity:1;transform:translateY(0)}
 .d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.28s}.d4{transition-delay:.38s}
- 
+
 /* ─── SECTIONS ─── */
 .wrap{padding:clamp(5rem,10vh,8rem) clamp(1.5rem,5vw,5rem);max-width:var(--max);margin:0 auto}
 .s-label{display:block;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem}
@@ -132,7 +131,7 @@ nav{
 .s-title em{font-style:italic;color:var(--text-dim)}
 .acc-bar{display:inline-block;width:36px;height:2px;border-radius:9px;background:linear-gradient(90deg,var(--accent),var(--accent2));margin-bottom:1.4rem}
 .divider{height:1px;background:var(--glass-border);margin:0 clamp(1.5rem,5vw,5rem)}
- 
+
 /* ─── HERO ─── */
 #hero{
   min-height:100vh;display:flex;flex-direction:column;justify-content:center;
@@ -200,7 +199,7 @@ nav{
   transition:background .2s,border-color .2s,transform .25s;
 }
 .btn-o:hover{background:var(--glass);border-color:rgba(255,255,255,.2);transform:translateY(-3px)}
- 
+
 /* Floating orb */
 .orb-wrap{
   position:absolute;right:clamp(2rem,8vw,9rem);top:50%;transform:translateY(-50%);
@@ -234,7 +233,7 @@ nav{
 }
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
 @keyframes spinR{to{transform:rotate(360deg)}}
- 
+
 /* scroll hint */
 .scroll-hint{
   position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
@@ -244,7 +243,7 @@ nav{
 }
 .scroll-line{width:1px;height:38px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrl 2s ease-in-out infinite}
 @keyframes scrl{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.25;transform:scaleY(.45)}}
- 
+
 /* ─── ABOUT ─── */
 #about{background:var(--bg2)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;margin-top:4rem}
@@ -259,7 +258,7 @@ nav{
 .scard:hover{background:var(--glass-hover);transform:translateY(-5px);border-color:rgba(126,184,247,.22)}
 .scard-n{font-family:var(--font-display);font-size:2.6rem;color:var(--accent);line-height:1}
 .scard-l{color:var(--text-dim);font-size:.75rem;margin-top:.5rem;letter-spacing:.04em}
- 
+
 /* ─── SKILLS ─── */
 #skills{background:var(--bg)}
 .pills{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.9rem;margin-top:3rem}
@@ -280,7 +279,7 @@ nav{
   color:var(--text-dim);cursor:none;transition:all .2s;
 }
 .cat:hover,.cat.on{background:rgba(126,184,247,.1);border-color:var(--accent);color:var(--accent)}
- 
+
 /* ─── EXPERIENCE ─── */
 #experience{background:var(--bg2)}
 .tl{margin-top:3.5rem;position:relative;padding-left:2px}
@@ -313,7 +312,7 @@ nav{
 .exp-ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
 .exp-ul li{font-size:.86rem;color:var(--text-dim);line-height:1.7;padding-left:1.4rem;position:relative}
 .exp-ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:.72rem;top:.2rem}
- 
+
 /* ─── PROJECTS ─── */
 #projects{background:var(--bg)}
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.4rem;margin-top:3rem}
@@ -339,7 +338,7 @@ nav{
   background:rgba(255,255,255,.04);border:1px solid var(--glass-border);
   color:var(--text-muted);padding:.22rem .6rem;border-radius:999px;
 }
- 
+
 /* ─── CONTACT ─── */
 #contact{background:var(--bg2)}
 .contact-inner{
@@ -365,7 +364,7 @@ nav{
 }
 .soc:hover{background:var(--glass-hover);color:var(--text);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
 .soc svg{flex-shrink:0}
- 
+
 /* ─── FOOTER ─── */
 footer{
   padding:1.8rem clamp(1.5rem,5vw,5rem);
@@ -375,13 +374,13 @@ footer{
 footer p{font-size:.72rem;color:var(--text-muted)}
 footer a{color:var(--text-muted);text-decoration:none;transition:color .2s}
 footer a:hover{color:var(--text-dim)}
- 
+
 /* ─── NOISE ─── */
 body::after{
   content:'';position:fixed;inset:0;z-index:500;pointer-events:none;opacity:.022;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
- 
+
 /* ─── RESPONSIVE ─── */
 @media(max-width:900px){
   .about-grid{grid-template-columns:1fr;gap:3rem}
@@ -396,7 +395,7 @@ body::after{
   body{cursor:auto}
   #cur,#cur-r{display:none}
 }
- 
+
 /* ─── PROJ CARD HOVER OVERLAY ─── */
 .proj-card{position:relative;overflow:hidden}
 .proj-overlay{
@@ -424,7 +423,7 @@ body::after{
   transform:translateY(8px);transition:transform .4s cubic-bezier(.16,1,.3,1) .05s;
 }
 .proj-card:hover .proj-overlay-type{transform:translateY(0)}
- 
+
 /* ─── MODAL BACKDROP ─── */
 #pm-backdrop{
   position:fixed;inset:0;z-index:1000;
@@ -436,7 +435,7 @@ body::after{
   transition:opacity .4s cubic-bezier(.16,1,.3,1),visibility .4s;
 }
 #pm-backdrop.open{opacity:1;visibility:visible}
- 
+
 /* ─── MODAL BOX ─── */
 #pm-box{
   background:linear-gradient(145deg,#0e1118,#0a0d14);
@@ -450,7 +449,7 @@ body::after{
 #pm-backdrop.open #pm-box{transform:translateY(0) scale(1)}
 #pm-box::-webkit-scrollbar{width:4px}
 #pm-box::-webkit-scrollbar-thumb{background:rgba(126,184,247,.2);border-radius:9px}
- 
+
 /* ─── MODAL HEADER ─── */
 .pm-header{
   position:sticky;top:0;z-index:10;
@@ -468,11 +467,11 @@ body::after{
 .pm-close:hover{background:rgba(255,255,255,.1);color:var(--text);transform:scale(1.1)}
 .pm-cat{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
 .pm-title{font-family:var(--font-display);font-size:clamp(1.4rem,3vw,2rem);letter-spacing:-.02em;line-height:1.1}
- 
+
 /* ─── MODAL BODY ─── */
 .pm-body{padding:0 2rem 2.5rem}
 .pm-desc{color:var(--text-dim);line-height:1.85;font-size:.92rem;margin-bottom:2rem}
- 
+
 /* ─── META ROW ─── */
 .pm-meta{
   display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem;
@@ -483,7 +482,7 @@ body::after{
 }
 .pm-meta-label{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.35rem}
 .pm-meta-val{font-size:.85rem;color:var(--text);font-weight:500}
- 
+
 /* ─── TOOLS TAGS ─── */
 .pm-tools{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
 .pm-tool{
@@ -491,7 +490,7 @@ body::after{
   color:var(--accent);font-size:.7rem;letter-spacing:.05em;
   padding:.3rem .8rem;border-radius:999px;
 }
- 
+
 /* ─── VIDEO PLAYER ─── */
 .pm-video-wrap{
   position:relative;width:100%;border-radius:var(--r);overflow:hidden;
@@ -506,7 +505,7 @@ body::after{
 /* Fade overlay for video transitions */
 .pm-video-wrap.fading{opacity:0;transition:opacity .18s ease}
 .pm-video-wrap.fading-in{opacity:1;transition:opacity .22s ease}
- 
+
 /* Custom play overlay (shown before first play) */
 .pm-play-overlay{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
@@ -522,7 +521,7 @@ body::after{
 }
 .pm-play-overlay:hover .pm-play-btn{background:rgba(126,184,247,.3);transform:scale(1.08)}
 .pm-play-btn svg{transform:translateX(2px)}
- 
+
 /* Loading spinner */
 .pm-vid-spinner{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
@@ -535,7 +534,7 @@ body::after{
   border-top-color:var(--accent);
   animation:spinR .8s linear infinite;
 }
- 
+
 /* Video meta bar (counter + duration) */
 .pm-vid-meta{
   display:flex;justify-content:space-between;align-items:center;
@@ -543,7 +542,7 @@ body::after{
 }
 .pm-vid-counter{font-size:.68rem;letter-spacing:.12em;color:var(--text-muted)}
 .pm-vid-duration{font-size:.68rem;color:var(--text-muted)}
- 
+
 /* Placeholder when no src */
 .pm-vid-placeholder{
   width:100%;aspect-ratio:16/9;
@@ -553,7 +552,7 @@ body::after{
 }
 .pm-vid-placeholder .big-ico{font-size:2.8rem;opacity:.5}
 .pm-vid-placeholder p{font-size:.78rem;color:var(--text-muted);text-align:center;max-width:280px;line-height:1.65}
- 
+
 /* ─── VIDEO NAV PILLS ─── */
 .pm-vid-nav{
   display:flex;gap:.55rem;margin-bottom:.4rem;flex-wrap:wrap;
@@ -571,7 +570,7 @@ body::after{
   opacity:0;transition:opacity .2s;
 }
 .pm-vid-tab.on .tab-dot{opacity:1}
- 
+
 /* ─── IMAGE GALLERY ─── */
 .pm-gallery{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
@@ -586,7 +585,7 @@ body::after{
 .pm-gallery-img:hover{transform:scale(1.03);border-color:rgba(126,184,247,.3)}
 .pm-gallery-img .placeholder-ico{font-size:2rem;opacity:.35}
 .pm-gallery-img img{width:100%;height:100%;object-fit:cover;display:block}
- 
+
 /* ─── LIGHTBOX ─── */
 #pm-lightbox{
   position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.94);
@@ -597,12 +596,12 @@ body::after{
 #pm-lightbox img{max-width:100%;max-height:90vh;border-radius:var(--r);box-shadow:0 0 80px rgba(0,0,0,.8)}
 .lb-close{position:absolute;top:1.5rem;right:1.5rem;background:var(--glass);border:1px solid var(--glass-border);color:var(--text);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:none;transition:all .2s}
 .lb-close:hover{background:rgba(255,255,255,.12)}
- 
+
 /* ─── FEATURES LIST (dev) ─── */
 .pm-features{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
 .pm-features li{font-size:.88rem;color:var(--text-dim);line-height:1.7;padding-left:1.4rem;position:relative}
 .pm-features li::before{content:'◆';position:absolute;left:0;color:var(--accent);font-size:.5rem;top:.35rem}
- 
+
 /* ─── GITHUB LINK ─── */
 .pm-gh-link{
   display:inline-flex;align-items:center;gap:.6rem;
@@ -612,19 +611,19 @@ body::after{
   transition:all .2s;margin-top:.5rem;
 }
 .pm-gh-link:hover{background:var(--glass-hover);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
- 
+
 /* ─── SECTION DIVIDER inside modal ─── */
 .pm-divider{height:1px;background:var(--glass-border);margin:1.8rem 0}
 .pm-section-label{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;display:block}
- 
+
 @media(max-width:600px){
   #pm-box{border-radius:20px}
   .pm-header,.pm-body{padding-left:1.2rem;padding-right:1.2rem}
   .pm-gallery{grid-template-columns:repeat(2,1fr)}
   .pm-meta-item{min-width:unset}
 }
- 
- 
+
+
 /* ─── SKILL PILL FILTER TRANSITIONS ─── */
 .pill{transition:all .35s cubic-bezier(.16,1,.3,1),opacity .3s ease,transform .3s ease}
 .pill--hidden{
@@ -633,14 +632,14 @@ body::after{
 }
 /* keep grid stable while pills hide */
 .pills{position:relative}
- 
+
 </style>
 </head>
 <body>
- 
+
 <div id="cur"></div>
 <div id="cur-r"></div>
- 
+
 <!-- LOADER -->
 <div id="loader">
   <div class="ld-name">
@@ -649,7 +648,7 @@ body::after{
   <div class="ld-track"><div class="ld-bar"></div></div>
   <span class="ld-label">Creative Portfolio</span>
 </div>
- 
+
 <!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#hero">AG.</a>
@@ -665,7 +664,7 @@ body::after{
     <span></span><span></span><span></span>
   </button>
 </nav>
- 
+
 <!-- MOBILE MENU -->
 <div class="mmenu" id="mmenu">
   <a href="#about" class="ml">About</a>
@@ -674,12 +673,12 @@ body::after{
   <a href="#projects" class="ml">Projects</a>
   <a href="#contact" class="ml">Contact</a>
 </div>
- 
+
 <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
- 
+
   <div class="hero-inner">
     <div class="hero-badge">Available for opportunities</div>
     <h1 class="hero-h1">
@@ -694,29 +693,29 @@ body::after{
       <a class="btn-o" href="#contact">Get in touch</a>
     </div>
   </div>
- 
+
   <div class="orb-wrap">
     <div class="orb">
       <div class="orb-core"></div>
       <div class="orb-ring"></div>
     </div>
   </div>
- 
+
   <div class="scroll-hint">
     <div class="scroll-line"></div>
     scroll
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- ═══════════════════════════════ ABOUT ════════════════════════════════ -->
 <section id="about">
   <div class="wrap">
     <span class="s-label rev">01 — About</span>
     <div class="acc-bar rev"></div>
     <h2 class="s-title rev">Crafting stories<br><em>through pixels.</em></h2>
- 
+
     <div class="about-grid">
       <div class="about-text">
         <p class="rev d1">I'm <strong>Atelle Philippe Gatchalian</strong>, a Computer Science student at Xavier University and a creative professional based in <strong>Cagayan de Oro, Philippines</strong>.</p>
@@ -745,9 +744,9 @@ body::after{
     </div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- ═══════════════════════════════ SKILLS ═══════════════════════════════ -->
 <section id="skills">
   <div class="wrap">
@@ -764,18 +763,18 @@ body::after{
     <div class="pills" id="skills-grid"></div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- ═══════════════════════════════ EXPERIENCE ════════════════════════════ -->
 <section id="experience">
   <div class="wrap">
     <span class="s-label rev">03 — Experience</span>
     <div class="acc-bar rev"></div>
     <h2 class="s-title rev">Where I've <em>grown.</em></h2>
- 
+
     <div class="tl">
- 
+
       <div class="tl-item rev d1">
         <div class="tl-dot"></div>
         <div class="exp-card">
@@ -793,7 +792,7 @@ body::after{
           </ul>
         </div>
       </div>
- 
+
       <div class="tl-item rev d2">
         <div class="tl-dot"></div>
         <div class="exp-card">
@@ -811,7 +810,7 @@ body::after{
           </ul>
         </div>
       </div>
- 
+
       <div class="tl-item rev d3">
         <div class="tl-dot"></div>
         <div class="exp-card">
@@ -829,22 +828,22 @@ body::after{
           </ul>
         </div>
       </div>
- 
+
     </div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- ═══════════════════════════════ PROJECTS ════════════════════════════════ -->
 <section id="projects">
   <div class="wrap">
     <span class="s-label rev">04 — Projects</span>
     <div class="acc-bar rev"></div>
     <h2 class="s-title rev">Selected <em>work.</em></h2>
- 
+
     <div class="proj-grid">
- 
+
       <!-- CARD 1: Video -->
       <div class="proj-card rev d1" data-proj="0" tabindex="0" role="button" aria-label="View Schlee Media Brand Reels project">
         <div class="proj-thumb">
@@ -866,7 +865,7 @@ body::after{
           </div>
         </div>
       </div>
- 
+
       <!-- CARD 2: Design -->
       <div class="proj-card rev d2" data-proj="1" tabindex="0" role="button" aria-label="View CAL Brand Materials project">
         <div class="proj-thumb">
@@ -888,7 +887,7 @@ body::after{
           </div>
         </div>
       </div>
- 
+
       <!-- CARD 3: Social -->
       <div class="proj-card rev d3" data-proj="2" tabindex="0" role="button" aria-label="View CAL Content Strategy project">
         <div class="proj-thumb">
@@ -910,7 +909,7 @@ body::after{
           </div>
         </div>
       </div>
- 
+
       <!-- CARD 4: Dev -->
       <div class="proj-card rev d1" data-proj="3" tabindex="0" role="button" aria-label="View DTI Budget Calculator System project">
         <div class="proj-thumb">
@@ -932,7 +931,7 @@ body::after{
           </div>
         </div>
       </div>
- 
+
       <!-- CARD 5: Research -->
       <div class="proj-card rev d2" data-proj="4" tabindex="0" role="button" aria-label="View Lemongrass Research project">
         <div class="proj-thumb">
@@ -954,7 +953,7 @@ body::after{
           </div>
         </div>
       </div>
- 
+
       <!-- CARD 6: Content -->
       <div class="proj-card rev d3" data-proj="5" tabindex="0" role="button" aria-label="View E-books and Lead Gen Assets project">
         <div class="proj-thumb">
@@ -976,13 +975,13 @@ body::after{
           </div>
         </div>
       </div>
- 
+
     </div>
   </div>
 </section>
- 
+
 <div class="divider"></div>
- 
+
 <!-- ═══════════════════════════════ CONTACT ════════════════════════════════ -->
 <section id="contact">
   <div class="contact-inner">
@@ -1007,19 +1006,41 @@ body::after{
     </div>
   </div>
 </section>
- 
+
 <!-- ═══════════════════════════════ FOOTER ════════════════════════════════ -->
 <footer>
   <p>© 2026 <a href="#hero">Atelle Philippe Gatchalian</a> — Cagayan de Oro, PH</p>
   <p>Designed with intention. Built with craft.</p>
 </footer>
- 
+
+
+
+<!-- ═══ PROJECT MODAL ═══ -->
+<div id="pm-backdrop" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+  <div id="pm-box">
+    <div class="pm-header">
+      <div>
+        <div class="pm-cat" id="pm-cat"></div>
+        <div class="pm-title" id="pm-title"></div>
+      </div>
+      <button class="pm-close" id="pm-close" aria-label="Close modal">✕</button>
+    </div>
+    <div class="pm-body" id="pm-body"></div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="pm-lightbox">
+  <button class="lb-close" id="lb-close">✕</button>
+  <img id="lb-img" src="" alt="Enlarged view">
+</div>
+
 <script>
 /* ── Loader ── */
 window.addEventListener('load', () => {
   setTimeout(() => document.getElementById('loader').classList.add('out'), 1800);
 });
- 
+
 /* ── Custom cursor ── */
 const cur = document.getElementById('cur');
 const curR = document.getElementById('cur-r');
@@ -1031,14 +1052,14 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
   curR.style.left = rx + 'px'; curR.style.top = ry + 'px';
   requestAnimationFrame(tick);
 })();
- 
+
 /* ── Scroll reveal ── */
 const revEls = document.querySelectorAll('.rev');
 const revObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 revEls.forEach(el => revObs.observe(el));
- 
+
 /* ── Mobile menu ── */
 const ham = document.getElementById('ham');
 const mm = document.getElementById('mmenu');
@@ -1049,7 +1070,7 @@ ham.addEventListener('click', () => {
 document.querySelectorAll('.ml').forEach(l => {
   l.addEventListener('click', () => { mm.classList.remove('open'); ham.classList.remove('open'); });
 });
- 
+
 /* ════════════════════════════════════════
    SKILLS FILTER SYSTEM
    ════════════════════════════════════════ */
@@ -1067,17 +1088,17 @@ const SKILLS = [
   { ico: '⚡', label: 'Fast Learner',      variant: 'v2', cats: ['all'] },
   { ico: '🤝', label: 'Collaboration',     variant: '',   cats: ['all'] },
 ];
- 
+
 const skillsGrid = document.getElementById('skills-grid');
- 
+
 function renderSkills(filter) {
   // Clear grid
   skillsGrid.innerHTML = '';
- 
+
   const visible = SKILLS.filter(s =>
     filter === 'all' || s.cats.includes('all') || s.cats.includes(filter)
   );
- 
+
   visible.forEach((s, i) => {
     const delay = ['d1','d2','d3','d1','d2','d3'][i % 6];
     const el = document.createElement('div');
@@ -1085,7 +1106,7 @@ function renderSkills(filter) {
     el.setAttribute('data-cats', s.cats.join(','));
     el.innerHTML = `<span class="ico">${s.ico}</span>${s.label}`;
     skillsGrid.appendChild(el);
- 
+
     // stagger entrance
     el.style.opacity = '0';
     el.style.transform = 'translateY(18px) scale(.95)';
@@ -1097,10 +1118,10 @@ function renderSkills(filter) {
     });
   });
 }
- 
+
 // Initial render
 renderSkills('all');
- 
+
 // Tab click handler
 document.querySelectorAll('#skill-cats .cat').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -1109,7 +1130,7 @@ document.querySelectorAll('#skill-cats .cat').forEach(btn => {
     renderSkills(btn.dataset.filter);
   });
 });
- 
+
 /* ── Hero parallax on mouse ── */
 const orbWrap = document.querySelector('.orb-wrap');
 document.addEventListener('mousemove', e => {
@@ -1118,7 +1139,7 @@ document.addEventListener('mousemove', e => {
   const y = (e.clientY / window.innerHeight - .5) * 16;
   orbWrap.style.transform = `translateY(-50%) translate(${x}px,${y}px)`;
 });
- 
+
 /* ── Nav highlight on scroll ── */
 const secs = document.querySelectorAll('section[id]');
 const nLinks = document.querySelectorAll('.nav-links a');
@@ -1132,11 +1153,11 @@ window.addEventListener('scroll', () => {
     }
   });
 }, { passive: true });
- 
+
 /* ════════════════════════════════════════════
    PROJECT MODAL SYSTEM
    ════════════════════════════════════════════ */
- 
+
 /* ── Project data ── */
 const PROJECTS = [
   {
@@ -1151,7 +1172,7 @@ const PROJECTS = [
     tools: ['CapCut','DaVinci Resolve','Adobe Premiere Pro','After Effects'],
     videos: [
       { label: 'Voyaro Reel', src: null, note: 'Add your Voyaro MP4 or YouTube embed URL here' },
-      { label: 'Snoozeloop Reel', src: '/path/to/snoozeloop-reel.mp4', note: 'Add your Snoozeloop MP4 or YouTube embed URL here' },
+      { label: 'Snoozeloop Reel', src: null, note: 'Add your Snoozeloop MP4 or YouTube embed URL here' },
       { label: 'LeVoleur Reel', src: null, note: 'Add your LeVoleur MP4 or YouTube embed URL here' },
     ]
   },
@@ -1252,7 +1273,7 @@ const PROJECTS = [
     ]
   }
 ];
- 
+
 /* ── Render helpers ── */
 function renderMeta(p) {
   return `<div class="pm-meta">
@@ -1261,12 +1282,12 @@ function renderMeta(p) {
     <div class="pm-meta-item"><div class="pm-meta-label">Period</div><div class="pm-meta-val">${p.period}</div></div>
   </div>`;
 }
- 
+
 function renderTools(tools) {
   return `<span class="pm-section-label">Tools & Software</span>
   <div class="pm-tools">${tools.map(t => `<span class="pm-tool">${t}</span>`).join('')}</div>`;
 }
- 
+
 /* Build the video player HTML for a single video entry.
    Called on modal open and on every tab switch.
    Does NOT assign .src yet — lazy loading happens in loadVideo(). */
@@ -1278,7 +1299,7 @@ function buildVideoPlayer(v) {
       <p>Add a file path or YouTube URL to <code>src</code> in the project data to display this video.</p>
     </div>`;
   }
- 
+
   if (v.src.includes('youtube.com') || v.src.includes('youtu.be')) {
     /* YouTube embed — convert watch URL to embed URL if needed */
     const embedSrc = v.src
@@ -1293,7 +1314,7 @@ function buildVideoPlayer(v) {
       </iframe>
     </div>`;
   }
- 
+
   /* MP4 / local file — lazy: src is set by loadVideo() after DOM insert */
   return `<div class="pm-video-wrap" id="pm-vid-wrap">
     <video
@@ -1322,27 +1343,27 @@ function buildVideoPlayer(v) {
     </div>
   </div>`;
 }
- 
+
 /* Lazy-load: assign src to the <video> element after it's in the DOM.
    Doing this after innerHTML insert prevents the browser preloading all videos. */
 function loadVideo(v) {
   const videoEl = document.getElementById('pm-video');
   if (!videoEl || !v.src) return;
- 
+
   const spinner = document.getElementById('pm-vid-spinner');
   const overlay = document.getElementById('pm-play-overlay');
- 
+
   /* Show spinner while loading */
   if (spinner) spinner.classList.add('show');
- 
+
   videoEl.src = v.src;
   videoEl.load(); /* triggers preload="none" fetch of metadata */
- 
+
   /* Hide spinner once enough data is loaded */
   videoEl.addEventListener('canplay', () => {
     if (spinner) spinner.classList.remove('show');
   }, { once: true });
- 
+
   /* Play overlay: click or Space starts playback */
   if (overlay) {
     const startPlay = () => {
@@ -1355,12 +1376,12 @@ function loadVideo(v) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startPlay(); }
     }, { once: true });
   }
- 
+
   /* Re-show overlay if video ends */
   videoEl.addEventListener('ended', () => {
     if (overlay) overlay.classList.remove('hidden');
   });
- 
+
   /* Update duration display once metadata loads */
   videoEl.addEventListener('loadedmetadata', () => {
     const dur = document.getElementById('pm-vid-duration');
@@ -1371,7 +1392,7 @@ function loadVideo(v) {
     }
   }, { once: true });
 }
- 
+
 /* Free video memory when switching tracks or closing modal */
 function unloadVideo() {
   const videoEl = document.getElementById('pm-video');
@@ -1380,7 +1401,7 @@ function unloadVideo() {
   videoEl.removeAttribute('src');
   videoEl.load(); /* releases buffered data */
 }
- 
+
 function renderImageGallery(images) {
   return `<span class="pm-section-label">Gallery</span>
   <div class="pm-gallery">${images.map((img, i) =>
@@ -1389,18 +1410,18 @@ function renderImageGallery(images) {
       : `<div class="pm-gallery-img" aria-label="${img.label} — placeholder"><span class="placeholder-ico">🖼️</span></div>`
   ).join('')}</div>`;
 }
- 
+
 function renderFeatures(features) {
   return `<span class="pm-section-label">Key Features</span>
   <ul class="pm-features">${features.map(f => `<li>${f}</li>`).join('')}</ul>`;
 }
- 
+
 /* ── Build modal content by type ── */
 function buildModalContent(p) {
   let html = `<p class="pm-desc">${p.desc}</p>`;
   html += renderMeta(p);
   html += '<div class="pm-divider"></div>';
- 
+
   if (p.type === 'video') {
     const total = p.videos.length;
     /* Nav pills — each has a colour dot indicator and aria labels */
@@ -1410,7 +1431,7 @@ function buildModalContent(p) {
         <span class="tab-dot" aria-hidden="true"></span>${v.label}
        </button>`
     ).join('');
- 
+
     html += `<span class="pm-section-label">Project Videos</span>
     <div class="pm-vid-nav" id="pm-vid-nav" role="tablist">${navPills}</div>
     <!-- counter + duration -->
@@ -1422,12 +1443,12 @@ function buildModalContent(p) {
     <div id="pm-vid-stage">${buildVideoPlayer(p.videos[0])}</div>
     <div class="pm-divider"></div>`;
     html += renderTools(p.tools);
- 
+
   } else if (p.type === 'design') {
     if (p.images) html += renderImageGallery(p.images);
     html += '<div class="pm-divider"></div>';
     html += renderTools(p.tools);
- 
+
   } else if (p.type === 'development') {
     if (p.images) html += renderImageGallery(p.images);
     html += '<div class="pm-divider"></div>';
@@ -1438,23 +1459,23 @@ function buildModalContent(p) {
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
       View on GitHub
     </a>`;
- 
+
   } else if (p.type === 'research') {
     if (p.features) html += renderFeatures(p.features);
     html += '<div class="pm-divider"></div>';
     html += renderTools(p.tools);
   }
- 
+
   return html;
 }
- 
+
 /* ── Open / Close modal ── */
 const backdrop = document.getElementById('pm-backdrop');
 const pmBody   = document.getElementById('pm-body');
 const pmCat    = document.getElementById('pm-cat');
 const pmTitle  = document.getElementById('pm-title');
 let lastFocus  = null;
- 
+
 function openModal(idx) {
   const p = PROJECTS[idx];
   if (!p) return;
@@ -1467,7 +1488,7 @@ function openModal(idx) {
   document.getElementById('pm-close').focus();
   bindModalEvents(p);
 }
- 
+
 function closeModal() {
   backdrop.classList.remove('open');
   document.body.style.overflow = '';
@@ -1477,21 +1498,21 @@ function closeModal() {
   /* Small delay before clearing DOM so close animation plays */
   setTimeout(() => { pmBody.innerHTML = ''; }, 450);
 }
- 
+
 /* activeVidIdx tracks the currently displayed video for keyboard nav */
 let activeVidIdx = 0;
- 
+
 function bindModalEvents(p) {
   if (p.type === 'video') {
     activeVidIdx = 0;
     /* Lazy-load first video after DOM is ready */
     loadVideo(p.videos[0]);
- 
+
     /* ── Tab pill switching ── */
     pmBody.querySelectorAll('.pm-vid-tab').forEach(tab => {
       tab.addEventListener('click', () => switchVideo(p, parseInt(tab.dataset.vi)));
     });
- 
+
     /* ── Keyboard: Left/Right arrows switch video; Space toggles play/pause ── */
     document.addEventListener('keydown', vidKeyHandler);
     function vidKeyHandler(e) {
@@ -1515,30 +1536,30 @@ function bindModalEvents(p) {
       }
     });
   }
- 
+
   /* ── Image lightbox ── */
   pmBody.querySelectorAll('.pm-gallery-img[data-src]').forEach(img => {
     img.addEventListener('click', () => openLightbox(img.dataset.src));
     img.addEventListener('keydown', e => { if (e.key === 'Enter') openLightbox(img.dataset.src); });
   });
 }
- 
+
 /* Switch to a different video tab with fade transition + lazy load */
 function switchVideo(p, newIdx) {
   if (newIdx === activeVidIdx) return;
   const stage   = document.getElementById('pm-vid-stage');
   const counter = document.getElementById('pm-vid-counter');
   const wrap    = document.getElementById('pm-vid-wrap');
- 
+
   /* 1. Unload current video to free memory */
   unloadVideo();
- 
+
   /* 2. Fade out wrap */
   if (wrap) {
     wrap.style.transition = 'opacity .18s ease';
     wrap.style.opacity = '0';
   }
- 
+
   setTimeout(() => {
     /* 3. Update active tab pill */
     pmBody.querySelectorAll('.pm-vid-tab').forEach((t, i) => {
@@ -1546,20 +1567,20 @@ function switchVideo(p, newIdx) {
       t.setAttribute('aria-pressed', i === newIdx ? 'true' : 'false');
     });
     activeVidIdx = newIdx;
- 
+
     /* 4. Replace stage HTML */
     stage.innerHTML = buildVideoPlayer(p.videos[newIdx]);
- 
+
     /* 5. Lazy-load new video src */
     loadVideo(p.videos[newIdx]);
- 
+
     /* 6. Update counter */
     if (counter) counter.textContent = `${newIdx + 1} / ${p.videos.length}`;
- 
+
     /* 7. Reset duration display */
     const dur = document.getElementById('pm-vid-duration');
     if (dur) dur.textContent = '—';
- 
+
     /* 8. Fade in */
     const newWrap = document.getElementById('pm-vid-wrap');
     if (newWrap) {
@@ -1571,11 +1592,11 @@ function switchVideo(p, newIdx) {
     }
   }, 180);
 }
- 
+
 /* ── Lightbox ── */
 const lightbox = document.getElementById('pm-lightbox');
 const lbImg    = document.getElementById('lb-img');
- 
+
 function openLightbox(src) {
   lbImg.src = src;
   lightbox.classList.add('open');
@@ -1584,10 +1605,10 @@ function closeLightbox() {
   lightbox.classList.remove('open');
   lbImg.src = '';
 }
- 
+
 document.getElementById('lb-close').addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
- 
+
 /* ── Wire up card clicks ── */
 document.querySelectorAll('.proj-card[data-proj]').forEach(card => {
   card.addEventListener('click', () => openModal(parseInt(card.dataset.proj)));
@@ -1595,7 +1616,7 @@ document.querySelectorAll('.proj-card[data-proj]').forEach(card => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(parseInt(card.dataset.proj)); }
   });
 });
- 
+
 /* ── Close triggers ── */
 document.getElementById('pm-close').addEventListener('click', closeModal);
 backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
@@ -1605,28 +1626,7 @@ document.addEventListener('keydown', e => {
     else if (backdrop.classList.contains('open')) closeModal();
   }
 });
- 
+
 </script>
- 
-<!-- ═══ PROJECT MODAL ═══ -->
-<div id="pm-backdrop" role="dialog" aria-modal="true" aria-labelledby="pm-title">
-  <div id="pm-box">
-    <div class="pm-header">
-      <div>
-        <div class="pm-cat" id="pm-cat"></div>
-        <div class="pm-title" id="pm-title"></div>
-      </div>
-      <button class="pm-close" id="pm-close" aria-label="Close modal">✕</button>
-    </div>
-    <div class="pm-body" id="pm-body"></div>
-  </div>
-</div>
- 
-<!-- LIGHTBOX -->
-<div id="pm-lightbox">
-  <button class="lb-close" id="lb-close">✕</button>
-  <img id="lb-img" src="" alt="Enlarged view">
-</div>
- 
 </body>
 </html>
