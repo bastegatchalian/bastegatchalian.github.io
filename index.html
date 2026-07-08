@@ -1,4 +1,4 @@
-Portfolio · HTML
+olio · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -495,32 +495,82 @@ body::after{
 /* ─── VIDEO PLAYER ─── */
 .pm-video-wrap{
   position:relative;width:100%;border-radius:var(--r);overflow:hidden;
-  background:#000;margin-bottom:1.2rem;
-  box-shadow:0 20px 50px rgba(0,0,0,.6);
+  background:#000;margin-bottom:0;
+  box-shadow:0 20px 50px rgba(0,0,0,.7);
 }
-.pm-video-wrap video,.pm-video-wrap iframe{
-  width:100%;aspect-ratio:16/9;display:block;border:none;
+/* Native video element — full width, 16:9, no letterboxing */
+.pm-video-wrap video{
+  width:100%;aspect-ratio:16/9;display:block;
+  border:none;background:#000;
 }
+/* Fade overlay for video transitions */
+.pm-video-wrap.fading{opacity:0;transition:opacity .18s ease}
+.pm-video-wrap.fading-in{opacity:1;transition:opacity .22s ease}
+ 
+/* Custom play overlay (shown before first play) */
+.pm-play-overlay{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(6,8,13,.45);z-index:5;
+  transition:opacity .25s ease;cursor:none;
+}
+.pm-play-overlay.hidden{opacity:0;pointer-events:none}
+.pm-play-btn{
+  width:64px;height:64px;border-radius:50%;
+  background:rgba(126,184,247,.18);border:1.5px solid rgba(126,184,247,.4);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .2s;
+}
+.pm-play-overlay:hover .pm-play-btn{background:rgba(126,184,247,.3);transform:scale(1.08)}
+.pm-play-btn svg{transform:translateX(2px)}
+ 
+/* Loading spinner */
+.pm-vid-spinner{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  z-index:6;pointer-events:none;opacity:0;transition:opacity .2s;
+}
+.pm-vid-spinner.show{opacity:1}
+.pm-spinner-ring{
+  width:40px;height:40px;border-radius:50%;
+  border:2px solid rgba(126,184,247,.15);
+  border-top-color:var(--accent);
+  animation:spinR .8s linear infinite;
+}
+ 
+/* Video meta bar (counter + duration) */
+.pm-vid-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.55rem .2rem;margin-bottom:1.2rem;
+}
+.pm-vid-counter{font-size:.68rem;letter-spacing:.12em;color:var(--text-muted)}
+.pm-vid-duration{font-size:.68rem;color:var(--text-muted)}
+ 
+/* Placeholder when no src */
 .pm-vid-placeholder{
   width:100%;aspect-ratio:16/9;
-  background:linear-gradient(135deg,rgba(126,184,247,.08),rgba(167,139,250,.06));
+  background:linear-gradient(135deg,rgba(126,184,247,.06),rgba(167,139,250,.04));
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:.8rem;border-radius:var(--r);border:1px dashed rgba(126,184,247,.2);
+  gap:.8rem;border-radius:var(--r);border:1px dashed rgba(126,184,247,.18);
 }
-.pm-vid-placeholder .big-ico{font-size:3rem;opacity:.6}
-.pm-vid-placeholder p{font-size:.8rem;color:var(--text-muted);text-align:center;max-width:260px;line-height:1.6}
+.pm-vid-placeholder .big-ico{font-size:2.8rem;opacity:.5}
+.pm-vid-placeholder p{font-size:.78rem;color:var(--text-muted);text-align:center;max-width:280px;line-height:1.65}
  
-/* ─── VIDEO CAROUSEL NAV ─── */
+/* ─── VIDEO NAV PILLS ─── */
 .pm-vid-nav{
-  display:flex;gap:.6rem;margin-bottom:2rem;flex-wrap:wrap;
+  display:flex;gap:.55rem;margin-bottom:.4rem;flex-wrap:wrap;
 }
 .pm-vid-tab{
   background:var(--glass);border:1px solid var(--glass-border);
-  border-radius:999px;padding:.38rem 1rem;
+  border-radius:999px;padding:.38rem 1.1rem;
   font-size:.72rem;color:var(--text-dim);cursor:none;
-  transition:all .2s;
+  transition:all .22s;display:flex;align-items:center;gap:.4rem;
 }
-.pm-vid-tab.on{background:rgba(126,184,247,.12);border-color:var(--accent);color:var(--accent)}
+.pm-vid-tab:hover{color:var(--text);border-color:rgba(255,255,255,.15)}
+.pm-vid-tab.on{background:rgba(126,184,247,.1);border-color:var(--accent);color:var(--accent)}
+.pm-vid-tab .tab-dot{
+  width:5px;height:5px;border-radius:50%;background:currentColor;
+  opacity:0;transition:opacity .2s;
+}
+.pm-vid-tab.on .tab-dot{opacity:1}
  
 /* ─── IMAGE GALLERY ─── */
 .pm-gallery{
@@ -1101,7 +1151,7 @@ const PROJECTS = [
     tools: ['CapCut','DaVinci Resolve','Adobe Premiere Pro','After Effects'],
     videos: [
       { label: 'Voyaro Reel', src: null, note: 'Add your Voyaro MP4 or YouTube embed URL here' },
-      { label: 'Snoozeloop Reel', src: null, note: 'Add your Snoozeloop MP4 or YouTube embed URL here' },
+      { label: 'Snoozeloop Reel', src: '/path/to/snoozeloop-reel.mp4', note: 'Add your Snoozeloop MP4 or YouTube embed URL here' },
       { label: 'LeVoleur Reel', src: null, note: 'Add your LeVoleur MP4 or YouTube embed URL here' },
     ]
   },
@@ -1217,14 +1267,118 @@ function renderTools(tools) {
   <div class="pm-tools">${tools.map(t => `<span class="pm-tool">${t}</span>`).join('')}</div>`;
 }
  
-function renderVideoPlaceholder(v, idx) {
-  if (v.src && v.src.includes('youtube')) {
-    return `<div class="pm-video-wrap"><iframe src="${v.src}" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe></div>`;
+/* Build the video player HTML for a single video entry.
+   Called on modal open and on every tab switch.
+   Does NOT assign .src yet — lazy loading happens in loadVideo(). */
+function buildVideoPlayer(v) {
+  if (!v.src) {
+    /* Placeholder — no file assigned yet */
+    return `<div class="pm-vid-placeholder">
+      <span class="big-ico">🎬</span>
+      <p>Add a file path or YouTube URL to <code>src</code> in the project data to display this video.</p>
+    </div>`;
   }
-  if (v.src) {
-    return `<div class="pm-video-wrap"><video controls preload="metadata" src="${v.src}"></video></div>`;
+ 
+  if (v.src.includes('youtube.com') || v.src.includes('youtu.be')) {
+    /* YouTube embed — convert watch URL to embed URL if needed */
+    const embedSrc = v.src
+      .replace('watch?v=', 'embed/')
+      .replace('youtu.be/', 'www.youtube.com/embed/');
+    return `<div class="pm-video-wrap" id="pm-vid-wrap">
+      <iframe
+        src="${embedSrc}"
+        allowfullscreen
+        allow="autoplay; encrypted-media; picture-in-picture"
+        title="${v.label}">
+      </iframe>
+    </div>`;
   }
-  return `<div class="pm-vid-placeholder"><span class="big-ico">🎬</span><p>${v.note || 'Upload your video file or paste a YouTube embed URL in the project data.'}</p></div>`;
+ 
+  /* MP4 / local file — lazy: src is set by loadVideo() after DOM insert */
+  return `<div class="pm-video-wrap" id="pm-vid-wrap">
+    <video
+      id="pm-video"
+      controls
+      playsinline
+      muted
+      preload="none"
+      ${v.poster ? `poster="${v.poster}"` : ''}
+      controlsList="nodownload"
+      disablePictureInPicture
+      title="${v.label}">
+      Your browser does not support HTML5 video.
+    </video>
+    <!-- Loading spinner — shown while video is buffering -->
+    <div class="pm-vid-spinner" id="pm-vid-spinner">
+      <div class="pm-spinner-ring"></div>
+    </div>
+    <!-- Play overlay — shown before first play, hidden on playback -->
+    <div class="pm-play-overlay" id="pm-play-overlay" role="button" aria-label="Play ${v.label}" tabindex="0">
+      <div class="pm-play-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="var(--accent)">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+    </div>
+  </div>`;
+}
+ 
+/* Lazy-load: assign src to the <video> element after it's in the DOM.
+   Doing this after innerHTML insert prevents the browser preloading all videos. */
+function loadVideo(v) {
+  const videoEl = document.getElementById('pm-video');
+  if (!videoEl || !v.src) return;
+ 
+  const spinner = document.getElementById('pm-vid-spinner');
+  const overlay = document.getElementById('pm-play-overlay');
+ 
+  /* Show spinner while loading */
+  if (spinner) spinner.classList.add('show');
+ 
+  videoEl.src = v.src;
+  videoEl.load(); /* triggers preload="none" fetch of metadata */
+ 
+  /* Hide spinner once enough data is loaded */
+  videoEl.addEventListener('canplay', () => {
+    if (spinner) spinner.classList.remove('show');
+  }, { once: true });
+ 
+  /* Play overlay: click or Space starts playback */
+  if (overlay) {
+    const startPlay = () => {
+      overlay.classList.add('hidden');
+      videoEl.muted = false; /* unmute on first intentional play */
+      videoEl.play();
+    };
+    overlay.addEventListener('click', startPlay, { once: true });
+    overlay.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startPlay(); }
+    }, { once: true });
+  }
+ 
+  /* Re-show overlay if video ends */
+  videoEl.addEventListener('ended', () => {
+    if (overlay) overlay.classList.remove('hidden');
+  });
+ 
+  /* Update duration display once metadata loads */
+  videoEl.addEventListener('loadedmetadata', () => {
+    const dur = document.getElementById('pm-vid-duration');
+    if (dur && !isNaN(videoEl.duration)) {
+      const m = Math.floor(videoEl.duration / 60);
+      const s = Math.floor(videoEl.duration % 60).toString().padStart(2, '0');
+      dur.textContent = `${m}:${s}`;
+    }
+  }, { once: true });
+}
+ 
+/* Free video memory when switching tracks or closing modal */
+function unloadVideo() {
+  const videoEl = document.getElementById('pm-video');
+  if (!videoEl) return;
+  videoEl.pause();
+  videoEl.removeAttribute('src');
+  videoEl.load(); /* releases buffered data */
 }
  
 function renderImageGallery(images) {
@@ -1248,12 +1402,24 @@ function buildModalContent(p) {
   html += '<div class="pm-divider"></div>';
  
   if (p.type === 'video') {
-    // Video carousel
+    const total = p.videos.length;
+    /* Nav pills — each has a colour dot indicator and aria labels */
+    const navPills = p.videos.map((v, i) =>
+      `<button class="pm-vid-tab ${i===0?'on':''}" data-vi="${i}"
+         aria-label="Play ${v.label} (video ${i+1} of ${total})" aria-pressed="${i===0}">
+        <span class="tab-dot" aria-hidden="true"></span>${v.label}
+       </button>`
+    ).join('');
+ 
     html += `<span class="pm-section-label">Project Videos</span>
-    <div class="pm-vid-nav">
-      ${p.videos.map((v, i) => `<button class="pm-vid-tab ${i===0?'on':''}" data-vi="${i}">${v.label}</button>`).join('')}
+    <div class="pm-vid-nav" id="pm-vid-nav" role="tablist">${navPills}</div>
+    <!-- counter + duration -->
+    <div class="pm-vid-meta">
+      <span class="pm-vid-counter" id="pm-vid-counter">1 / ${total}</span>
+      <span class="pm-vid-duration" id="pm-vid-duration">—</span>
     </div>
-    <div id="pm-vid-stage">${renderVideoPlaceholder(p.videos[0], 0)}</div>
+    <!-- stage: only player HTML lives here; src assigned lazily by loadVideo() -->
+    <div id="pm-vid-stage">${buildVideoPlayer(p.videos[0])}</div>
     <div class="pm-divider"></div>`;
     html += renderTools(p.tools);
  
@@ -1306,27 +1472,104 @@ function closeModal() {
   backdrop.classList.remove('open');
   document.body.style.overflow = '';
   if (lastFocus) lastFocus.focus();
-  // stop any playing videos
-  pmBody.querySelectorAll('video').forEach(v => v.pause());
+  /* Properly unload video — pause, strip src, release buffer */
+  unloadVideo();
+  /* Small delay before clearing DOM so close animation plays */
+  setTimeout(() => { pmBody.innerHTML = ''; }, 450);
 }
  
-function bindModalEvents(p) {
-  // Video tab switching
-  pmBody.querySelectorAll('.pm-vid-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      pmBody.querySelectorAll('.pm-vid-tab').forEach(t => t.classList.remove('on'));
-      tab.classList.add('on');
-      const vi = parseInt(tab.dataset.vi);
-      const stage = document.getElementById('pm-vid-stage');
-      stage.innerHTML = renderVideoPlaceholder(p.videos[vi], vi);
-    });
-  });
+/* activeVidIdx tracks the currently displayed video for keyboard nav */
+let activeVidIdx = 0;
  
-  // Image lightbox
+function bindModalEvents(p) {
+  if (p.type === 'video') {
+    activeVidIdx = 0;
+    /* Lazy-load first video after DOM is ready */
+    loadVideo(p.videos[0]);
+ 
+    /* ── Tab pill switching ── */
+    pmBody.querySelectorAll('.pm-vid-tab').forEach(tab => {
+      tab.addEventListener('click', () => switchVideo(p, parseInt(tab.dataset.vi)));
+    });
+ 
+    /* ── Keyboard: Left/Right arrows switch video; Space toggles play/pause ── */
+    document.addEventListener('keydown', vidKeyHandler);
+    function vidKeyHandler(e) {
+      /* Only active when modal is open and project is video type */
+      if (!backdrop.classList.contains('open')) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); switchVideo(p, Math.min(activeVidIdx + 1, p.videos.length - 1)); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); switchVideo(p, Math.max(activeVidIdx - 1, 0)); }
+      if (e.key === ' ') {
+        const v = document.getElementById('pm-video');
+        if (v && document.activeElement !== document.getElementById('pm-close')) {
+          e.preventDefault();
+          v.paused ? v.play() : v.pause();
+        }
+      }
+    }
+    /* Clean up keyboard listener when modal closes */
+    backdrop.addEventListener('transitionend', function cleanup() {
+      if (!backdrop.classList.contains('open')) {
+        document.removeEventListener('keydown', vidKeyHandler);
+        backdrop.removeEventListener('transitionend', cleanup);
+      }
+    });
+  }
+ 
+  /* ── Image lightbox ── */
   pmBody.querySelectorAll('.pm-gallery-img[data-src]').forEach(img => {
     img.addEventListener('click', () => openLightbox(img.dataset.src));
     img.addEventListener('keydown', e => { if (e.key === 'Enter') openLightbox(img.dataset.src); });
   });
+}
+ 
+/* Switch to a different video tab with fade transition + lazy load */
+function switchVideo(p, newIdx) {
+  if (newIdx === activeVidIdx) return;
+  const stage   = document.getElementById('pm-vid-stage');
+  const counter = document.getElementById('pm-vid-counter');
+  const wrap    = document.getElementById('pm-vid-wrap');
+ 
+  /* 1. Unload current video to free memory */
+  unloadVideo();
+ 
+  /* 2. Fade out wrap */
+  if (wrap) {
+    wrap.style.transition = 'opacity .18s ease';
+    wrap.style.opacity = '0';
+  }
+ 
+  setTimeout(() => {
+    /* 3. Update active tab pill */
+    pmBody.querySelectorAll('.pm-vid-tab').forEach((t, i) => {
+      t.classList.toggle('on', i === newIdx);
+      t.setAttribute('aria-pressed', i === newIdx ? 'true' : 'false');
+    });
+    activeVidIdx = newIdx;
+ 
+    /* 4. Replace stage HTML */
+    stage.innerHTML = buildVideoPlayer(p.videos[newIdx]);
+ 
+    /* 5. Lazy-load new video src */
+    loadVideo(p.videos[newIdx]);
+ 
+    /* 6. Update counter */
+    if (counter) counter.textContent = `${newIdx + 1} / ${p.videos.length}`;
+ 
+    /* 7. Reset duration display */
+    const dur = document.getElementById('pm-vid-duration');
+    if (dur) dur.textContent = '—';
+ 
+    /* 8. Fade in */
+    const newWrap = document.getElementById('pm-vid-wrap');
+    if (newWrap) {
+      newWrap.style.opacity = '0';
+      requestAnimationFrame(() => {
+        newWrap.style.transition = 'opacity .22s ease';
+        newWrap.style.opacity = '1';
+      });
+    }
+  }, 180);
 }
  
 /* ── Lightbox ── */
@@ -1387,4 +1630,3 @@ document.addEventListener('keydown', e => {
  
 </body>
 </html>
- 
