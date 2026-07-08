@@ -1172,7 +1172,7 @@ const PROJECTS = [
     tools: ['CapCut','DaVinci Resolve','Adobe Premiere Pro','After Effects'],
     videos: [
       { label: 'Voyaro Reel', src: null, note: 'Add your Voyaro MP4 or YouTube embed URL here' },
-      { label: 'Snoozeloop Reel', src: '/path/to/snoozeloop-reel.mp4', note: 'Add your Snoozeloop MP4 or YouTube embed URL here' },
+      { label: 'Snoozeloop Reel', src: 'videos/snoozeloop.mp4', poster: null },
       { label: 'LeVoleur Reel', src: null, note: 'Add your LeVoleur MP4 or YouTube embed URL here' },
     ]
   },
@@ -1367,10 +1367,17 @@ function loadVideo(v) {
   /* Play overlay: click or Space starts playback */
   if (overlay) {
     const startPlay = () => {
-      overlay.classList.add('hidden');
-      videoEl.muted = false; /* unmute on first intentional play */
-      videoEl.play();
-    };
+  overlay.classList.add('hidden');
+  videoEl.muted = false;
+  // Only play if the browser has a valid source loaded
+  if (videoEl.readyState >= 1) {
+    videoEl.play().catch(err => console.warn('Playback failed:', err));
+  } else {
+    videoEl.addEventListener('canplay', () => {
+      videoEl.play().catch(err => console.warn('Playback failed:', err));
+    }, { once: true });
+  }
+};
     overlay.addEventListener('click', startPlay, { once: true });
     overlay.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startPlay(); }
