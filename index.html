@@ -888,24 +888,25 @@ body::after{
         </div>
       </div>
 
-      <!-- CARD 3: Social -->
-      <div class="proj-card rev d3" data-proj="2" tabindex="0" role="button" aria-label="View CAL Content Strategy project">
+      <!-- CARD 3: CAL Ad Videos -->
+      <div class="proj-card rev d3" data-proj="2" tabindex="0" role="button" aria-label="View CAL Ad Videos project">
         <div class="proj-thumb">
           <div class="bg" style="background:linear-gradient(135deg,rgba(167,139,250,.13),rgba(52,211,153,.08))"></div>
-          <span class="proj-ico">📱</span>
+          <span class="proj-ico">🎥</span>
         </div>
         <div class="proj-overlay">
-          <div class="proj-overlay-btn">View Strategy ↗</div>
-          <div class="proj-overlay-type">Social Media</div>
+          <div class="proj-overlay-btn">Watch Ads ↗</div>
+          <div class="proj-overlay-type">Video Ads</div>
         </div>
         <div class="proj-body">
-          <div class="proj-cat">Social Media Campaigns</div>
-          <div class="proj-name">CAL Content Strategy</div>
-          <div class="proj-desc">Weekly content calendars, SEO copy, and direct-response ads that grew output by 25%.</div>
+          <div class="proj-cat">Social Media Ads</div>
+          <div class="proj-name">CAL — Ad Videos & Campaigns</div>
+          <div class="proj-desc">Short-form ad videos for 11.11 Promo, Open House, Instagram Reels, Stories, and feed posts — all branded for CAL.</div>
           <div class="tags">
-            <span class="tag">Content Calendar</span>
-            <span class="tag">SEO Copy</span>
-            <span class="tag">+25% output</span>
+            <span class="tag">11.11 Promo</span>
+            <span class="tag">Open House</span>
+            <span class="tag">IG Reels</span>
+            <span class="tag">Stories</span>
           </div>
         </div>
       </div>
@@ -1171,9 +1172,9 @@ const PROJECTS = [
     desc: 'Edited short-form videos and Instagram Reels for three brand clients — Voyaro, Snoozeloop, and LeVoleur. Applied strategic pacing, dynamic cuts, on-screen captions, and visual storytelling tailored to each brand. Delivered consistent, polished content that contributed to a 20–30% improvement in output volume per client.',
     tools: ['CapCut','DaVinci Resolve','Adobe Premiere Pro','After Effects'],
     videos: [
-      { label: 'Voyaro Reel', src: 'Schlee-Media/voyaro.mp4', poster: null },
-      { label: 'Snoozeloop Reel', src: 'Schlee-Media/snoozeloop.mp4', poster: null },
-      { label: 'LeVoleur Reel', src: 'Schlee-Media/le-voleur.mp4', poster: null },
+      { label: 'Voyaro Reel', src: null, note: 'Add your Voyaro MP4 or YouTube embed URL here' },
+      { label: 'Snoozeloop Reel', src: null, note: 'Add your Snoozeloop MP4 or YouTube embed URL here' },
+      { label: 'LeVoleur Reel', src: null, note: 'Add your LeVoleur MP4 or YouTube embed URL here' },
     ]
   },
   {
@@ -1187,6 +1188,7 @@ const PROJECTS = [
     desc: 'Designed a full suite of branded marketing materials including goodie bags, pamphlets, cups, and intro cards. Maintained a cohesive visual identity across all physical and digital touchpoints while building weekly content calendars for recurring social media series.',
     tools: ['Adobe Illustrator','Canva','Photoshop','Figma'],
     images: [
+      { label: 'Goodie Bag', src: null },
       { label: 'Pamphlet', src: null },
       { label: 'Intro Cards', src: null },
       { label: 'Social Assets', src: null },
@@ -1196,19 +1198,22 @@ const PROJECTS = [
   },
   {
     id: 2,
-    type: 'design',
-    cat: 'Social Media Campaigns',
-    title: 'CAL Content Strategy',
+    type: 'video',
+    cat: 'Social Media Ads',
+    title: 'CAL — Ad Videos & Campaigns',
     client: 'CAL — Creative Aesthetics & Lifestyle',
-    role: 'Creative Designer / Content Strategist',
+    role: 'Creative Designer / Video Editor',
     period: 'May 2025 – Present',
-    desc: 'Built and managed weekly content calendars for recurring social media series. Produced SEO-optimised copy, direct-response ads, and e-books to support lead generation — boosting content output volume by approximately 25% while maintaining consistent brand voice.',
-    tools: ['Notion','Canva','Google Workspace','Meta Ads Manager'],
-    images: [
-      { label: 'Content Calendar', src: null },
-      { label: 'Ad Creative 1', src: null },
-      { label: 'Ad Creative 2', src: null },
-      { label: 'Social Post', src: null },
+    desc: 'Produced a series of short-form ad videos and social media content for CAL, covering promotional campaigns, event announcements, and branded storytelling. Work includes 11.11 promo ads, open house event videos, Instagram Reels, feed posts, and Stories — all edited and designed to match CAL brand identity.',
+    tools: ['CapCut', 'Canva', 'Adobe Premiere Pro', 'Meta Ads Manager', 'Notion'],
+    videos: [
+      /* Add your CAL video files here. Example:
+         src: 'videos/cal-1111-promo.mp4', poster: 'images/cal-1111-cover.jpg'
+         Leave src as null until you add the file — a placeholder will show instead. */
+      { label: '11.11 Promo',      src: null, poster: null },
+      { label: 'Open House',       src: null, poster: null },
+      { label: 'Instagram Reels',  src: null, poster: null },
+      { label: 'IG Stories',       src: null, poster: null },
     ]
   },
   {
@@ -1366,17 +1371,10 @@ function loadVideo(v) {
   /* Play overlay: click or Space starts playback */
   if (overlay) {
     const startPlay = () => {
-  overlay.classList.add('hidden');
-  videoEl.muted = false;
-  // Only play if the browser has a valid source loaded
-  if (videoEl.readyState >= 1) {
-    videoEl.play().catch(err => console.warn('Playback failed:', err));
-  } else {
-    videoEl.addEventListener('canplay', () => {
-      videoEl.play().catch(err => console.warn('Playback failed:', err));
-    }, { once: true });
-  }
-};
+      overlay.classList.add('hidden');
+      videoEl.muted = false; /* unmute on first intentional play */
+      videoEl.play();
+    };
     overlay.addEventListener('click', startPlay, { once: true });
     overlay.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startPlay(); }
